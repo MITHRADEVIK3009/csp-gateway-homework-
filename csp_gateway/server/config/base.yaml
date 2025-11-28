@@ -1,3 +1,4 @@
+இந்த file ஒரு startup instruction book மாதிரி.
 defaults:
     - modules@modules
     - override hydra/job_logging: custom
