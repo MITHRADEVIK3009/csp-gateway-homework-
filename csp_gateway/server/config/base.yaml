@@ -1,4 +1,162 @@
 இந்த file ஒரு startup instruction book மாதிரி.
+📖 Story: “Gateway Server-ன் Diary & Office Address Book”
+
+இந்த file ஒரு startup instruction book மாதிரி.
+
+Gateway server start ஆகும் போது, மேனேஜர் இந்த புத்தகத்தை திறக்குறார்.
+
+🚪 Opening dialogue:
+
+“இன்னைக்கு Gateway எப்படி வேலை செய்யும்
+எங்க log போகும்
+எங்க files சேமிக்கணும்
+யாரெல்லாம் office-ல வேலை செய்யணும்
+எல்லாம் இங்க தான் எழுதிருக்குது…”
+
+📂 Scene 1 – Attendance Sheet (defaults section)
+defaults:
+    - modules@modules
+    - override hydra/job_logging: custom
+    - _self_
+
+
+Story:
+
+Boss சொல்றார்:
+
+"First… employee list ready பண்ணு!"
+
+இந்த line:
+
+- modules@modules
+
+
+meaning:
+
+“modules.yaml file-ல இருந்த எல்லா modules-யும் load பண்ணு!”
+
+- override hydra/job_logging: custom
+
+
+Story:
+
+"Normal logstyle வேண்டாம்,
+custom log format தான் வேணும்!"
+
+So:
+
+Logging style custom
+
+print formats control
+
+- _self_
+
+
+Meaning:
+
+“இந்த file-யும் include பண்ணு”
+
+Without this:
+
+only defaults load
+this config ignored 💀
+
+🚀 Scene 2 – Server Opening Switchboard (start section)
+start:
+    realtime: True
+    block: False
+    show: False
+    rest: True
+    ui: True
+
+
+Story:
+
+Boss asks:
+
+"Server open ஆ?"
+
+Here each switch means:
+Option	Story Meaning
+realtime: True	"Live data only!"
+block: False	"Don't freeze the app, run in background."
+show: False	"No terminal UI needed."
+rest: True	"API routes open!"
+ui: True	"Dashboard show pannu."
+📁 Scene 3 – Hydra Writes Diary (hydra.run.dir)
+hydra:
+  run:
+    dir: outputs/${hostname}_${hydra.job.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+
+Story:
+
+Every time Gateway runs:
+
+Hydra opens a diary like:
+
+outputs/MACHINE_NAME/GatewayJob/2025-11-27/09-40-13/
+
+Inside:
+
+📄 Logs
+📄 Config copies
+📄 Error details
+📄 Debug info
+
+⭐ Important Twist:
+“mount_outputs respect Hydra output”
+
+You mentioned:
+
+"mountoutputs respect hydra output"
+
+Story meaning:
+
+MountOutputsFolder module says:
+
+“Naah yedukkanam… Hydra yenga output folder create pannutho…
+adha dhaan UI-ல share pannuvaen.”
+
+So:
+
+Hydra decides folder path
+
+MountOutputsFolder reads same
+
+UI shows correct folder
+
+Logs + files sync automatically ✅
+
+Without this:
+
+MountOutputsFolder may show wrong folder
+or empty folder ❌
+
+✅ Real Behaviour
+
+This file controls:
+
+1️⃣ Server startup behaviour
+2️⃣ Which modules run
+3️⃣ Where logs are saved
+4️⃣ Where files are written
+5️⃣ UI + REST + streaming enable
+6️⃣ Separation of every run using date-time folders
+🏁 Story Ending Line
+
+Boss shuts the diary:
+
+“Hydra config- இல்லாம
+Gateway blind-ஆ ஓடும்.
+
+modules.yaml இல்லாம
+Gateway empty office.”
+
+
+================
+
+
 defaults:
     - modules@modules
     - override hydra/job_logging: custom
